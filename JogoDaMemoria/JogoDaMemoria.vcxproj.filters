@@ -105,6 +105,9 @@
     <ClCompile Include="load_game.cpp">
       <Filter>Source Files\docs</Filter>
     </ClCompile>
+    <ClCompile Include="draw_leaderboard_table.cpp">
+      <Filter>Source Files\draws</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.hpp">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="load_game.hpp">
       <Filter>Header Files\docs</Filter>
+    </ClInclude>
+    <ClInclude Include="draw_leaderboard_table.hpp">
+      <Filter>Header Files\draws</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
