@@ -23,6 +23,6 @@ std::vector<Player> read_scoreboard() {
 		players.push_back(player);
 	}
 	
-	quickSort(players);
+	quickSort(players, 0, players.size());
 	return players;
 }

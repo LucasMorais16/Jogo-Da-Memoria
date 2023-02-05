@@ -3,4 +3,4 @@
 #include <vector>
 #include "player.hpp"
 
-void quickSort(std::vector<Player>& players, int& left, int& right);
+void quickSort(std::vector<Player>& players, int left, int right);

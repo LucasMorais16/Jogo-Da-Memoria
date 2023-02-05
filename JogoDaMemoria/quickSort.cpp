@@ -1,6 +1,6 @@
 #include "quickSort.hpp"
 
-void quickSort(std::vector<Player>& players, int& left, int& right) {
+void quickSort(std::vector<Player>& players, int left, int right) {
 	int i = left, j = right;
 	Player pivot = players[(left + right) / 2];
 
