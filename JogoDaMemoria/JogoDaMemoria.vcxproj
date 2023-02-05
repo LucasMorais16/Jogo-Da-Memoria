@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="difficulty.cpp" />
     <ClCompile Include="draw_interface.cpp" />
+    <ClCompile Include="draw_leaderboard_table.cpp" />
     <ClCompile Include="get_file_name.cpp" />
     <ClCompile Include="get_player_name.cpp" />
     <ClCompile Include="init_game_cards.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="difficulty.hpp" />
     <ClInclude Include="draw_card.hpp" />
     <ClInclude Include="draw_interface.hpp" />
+    <ClInclude Include="draw_leaderboard_table.hpp" />
     <ClInclude Include="get_file_name.hpp" />
     <ClInclude Include="get_player_name.hpp" />
     <ClInclude Include="init_game_cards.hpp" />
