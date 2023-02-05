@@ -8,7 +8,7 @@ void init_game_interface(ALLEGRO_BITMAP* interf_images[], Interface interface[NU
 		interface[i].hud = interf_images[interface[i].id];
 
 		if (i == 0) {
-			interface[i].x = (screen_w - INTERF_W * 13.5) / 2 + (i % 4) * (INTERF_W + spacing);
+			interface[i].x = (screen_w - INTERF_W * 13.7) / 2 + (i % 4) * (INTERF_W + spacing);
 			interface[i].y = (screen_h - INTERF_H * 12) / 2 + (i / 4) * (INTERF_H + spacing);
 		}
 		if (i == 1) {
@@ -28,20 +28,20 @@ void init_game_interface(ALLEGRO_BITMAP* interf_images[], Interface interface[NU
 			interface[i].y = (screen_h - INTERF_H * 2) / 2.26 + (INTERF_H + spacing);
 		}
 		if (i == 5) {
-			interface[i].x = (screen_w - INTERF_W * 4) / 2 + (INTERF_W + spacing);
-			interface[i].y = (screen_h - INTERF_H * 8) / 2 + (INTERF_H + spacing);
+			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);
+			interface[i].y = (screen_h - INTERF_MENU_H * 8) / 2 + (INTERF_MENU_H + spacing);
 		}
 		if (i == 6) {
-			interface[i].x = (screen_w - INTERF_W * 4) / 2 + (INTERF_W + spacing);
-			interface[i].y = (screen_h - INTERF_H * 5) / 2 + (INTERF_H + spacing);
+			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);
+			interface[i].y = (screen_h - INTERF_MENU_H * 5.1) / 2 + (INTERF_MENU_H + spacing);
 		}
 		if (i == 7) {
-			interface[i].x = (screen_w - INTERF_W * 4) / 2 + (INTERF_W + spacing);
-			interface[i].y = (screen_h - INTERF_H * 2) / 2 + (INTERF_H + spacing);
+			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);
+			interface[i].y = (screen_h - INTERF_MENU_H * 2.4) / 2 + (INTERF_MENU_H + spacing);
 		}
 		if (i == 8) {
-			interface[i].x = (screen_w - INTERF_W * 4) / 2 + (INTERF_W + spacing);
-			interface[i].y = (screen_h - INTERF_H * 0.5) / 2 + (INTERF_H + spacing + 23);
+			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);
+			interface[i].y = (screen_h - INTERF_MENU_H * 0.5) / 2 + (INTERF_MENU_H + spacing + 23);
 		}
 		if (i == 9) {
 			interface[i].x = (screen_w - INTERF_DIFFICULTY_W * 3.7) / 2 + (INTERF_DIFFICULTY_W + spacing);

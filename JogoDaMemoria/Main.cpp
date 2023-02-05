@@ -19,6 +19,10 @@
 #include "memorize_card.hpp"
 #include "constantes.hpp"
 #include "difficulty.hpp"
+#include "save_scoreboard.hpp"
+#include "load_game.hpp"
+#include "save_game.hpp"
+#include "read_scoreboard.hpp"
 
 int main(int argc, char** argv) {
 	Card game_cards[NUM_CARDS];
@@ -255,9 +259,9 @@ int main(int argc, char** argv) {
 				}
 				//SAVE *****FAZER*****
 				if (x > interface[3].x && x < interface[3].x + INTERF_W && y > interface[3].y && y < interface[3].y + INTERF_H) {
-					//player_name = get_player_name();
-					std::string file_name = player_name + ".sav";
-					//save_game(file_name, game_state);
+					if (!save_scoreboard(nameScoreBoard, score)) {
+						al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+					}
 					break;
 				}
 				//CHANGE PLAYER *****FAZER*****
