@@ -29,7 +29,14 @@ bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_E
 					}
 					//LEADERBOARD
 					if (x > interface[7].x && x < interface[7].x + INTERF_W && y > interface[7].y && y < interface[7].y + INTERF_H) {
+						bool leaderboard_done = false;
 						
+						while (!leaderboard_done) {
+							draw_leaderboard_table();
+							if (x > interface[9].x && x < interface[9].x + INTERF_W && y > interface[9].y && y < interface[9].y + INTERF_H) {
+								leaderboard_done = true;
+							}
+						}
 					}
 					//QUIT
 					if (x > interface[8].x && x < interface[8].x + INTERF_W && y > interface[8].y && y < interface[8].y + INTERF_H) {
