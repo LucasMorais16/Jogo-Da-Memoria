@@ -8,5 +8,4 @@ typedef struct {
 	int y;
 	bool is_flipped;
 	ALLEGRO_BITMAP *front_image;
-	ALLEGRO_BITMAP *back_image;
 } Card;

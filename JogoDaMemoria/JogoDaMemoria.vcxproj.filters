@@ -99,6 +99,12 @@
     <ClCompile Include="difficulty.cpp">
       <Filter>Source Files\menus</Filter>
     </ClCompile>
+    <ClCompile Include="save_game.cpp">
+      <Filter>Source Files\docs</Filter>
+    </ClCompile>
+    <ClCompile Include="load_game.cpp">
+      <Filter>Source Files\docs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.hpp">
@@ -154,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="difficulty.hpp">
       <Filter>Header Files\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="save_game.hpp">
+      <Filter>Header Files\docs</Filter>
+    </ClInclude>
+    <ClInclude Include="load_game.hpp">
+      <Filter>Header Files\docs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

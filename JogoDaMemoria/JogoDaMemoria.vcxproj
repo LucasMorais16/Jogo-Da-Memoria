@@ -146,12 +146,14 @@
     <ClCompile Include="get_player_name.cpp" />
     <ClCompile Include="init_game_cards.cpp" />
     <ClCompile Include="init_game_interface.cpp" />
+    <ClCompile Include="load_game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="draw_card.cpp" />
     <ClCompile Include="memorize_card.cpp" />
     <ClCompile Include="menu_inicial.cpp" />
     <ClCompile Include="quickSort.cpp" />
     <ClCompile Include="read_scoreboard.cpp" />
+    <ClCompile Include="save_game.cpp" />
     <ClCompile Include="save_scoreboard.cpp" />
     <ClCompile Include="scoreBoard.cpp" />
     <ClCompile Include="shuffle.cpp" />
@@ -165,10 +167,12 @@
     <ClInclude Include="get_player_name.hpp" />
     <ClInclude Include="init_game_cards.hpp" />
     <ClInclude Include="init_game_interface.hpp" />
+    <ClInclude Include="load_game.hpp" />
     <ClInclude Include="memorize_card.hpp" />
     <ClInclude Include="menu_inicial.hpp" />
     <ClInclude Include="quickSort.hpp" />
     <ClInclude Include="read_scoreboard.hpp" />
+    <ClInclude Include="save_game.hpp" />
     <ClInclude Include="save_scoreboard.hpp" />
     <ClInclude Include="scoreBoard.hpp" />
     <ClInclude Include="shuffle.hpp" />
