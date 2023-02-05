@@ -8,7 +8,7 @@ void init_game_interface(ALLEGRO_BITMAP* interf_images[], Interface interface[NU
 		interface[i].hud = interf_images[interface[i].id];
 
 		if (i == 0) {
-			interface[i].x = (screen_w - INTERF_W * 13.5) / 2 + (i % 4) * (INTERF_W + spacing);
+			interface[i].x = (screen_w - INTERF_W * 13.7) / 2 + (i % 4) * (INTERF_W + spacing);
 			interface[i].y = (screen_h - INTERF_H * 12) / 2 + (i / 4) * (INTERF_H + spacing);
 		}
 		if (i == 1) {
