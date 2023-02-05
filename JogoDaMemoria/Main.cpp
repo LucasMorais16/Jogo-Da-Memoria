@@ -136,6 +136,7 @@ int main(int argc, char** argv) {
 	int memorize_timer = 5000;
 	int increase_score = 125;
 	int decrease_score = 25;
+	bool memorize = true;
 	std::string nameScoreBoard;
 	std::string player_name;
 
@@ -145,18 +146,22 @@ int main(int argc, char** argv) {
 
 	if (!done) {
 		nameScoreBoard = get_player_name(event_queue, nameScoreBoard);
-		game_state.playerName = nameScoreBoard;
+		if (nameScoreBoard != "a") {
+			game_state.playerName = nameScoreBoard;
+		}
+		else {
+			done = true;
+		}
+	}
+
+	if (!done) {
 		difficulty = menu_dificuldades(redraw, interface, event_queue);
-	}
-
-	bool memorize = true;
-
-	if (difficulty == -1) {
-		done = true;
-	}
-
-	if (difficulty == 0) {
-		memorize_timer = 10000;
+		if (difficulty == -1) {
+			done = true;
+		}
+		if (difficulty == 0) {
+			memorize_timer = 10000;
+		}
 	}
 
 	//Jogo
@@ -295,7 +300,7 @@ int main(int argc, char** argv) {
 			for (int i = 0; i < NUM_CARDS; i++) {
 				draw_card(game_cards[i]);
 			}
-			for (int i = 0; i < NUM_INTERF - 7; i++) {
+			for (int i = 0; i < NUM_INTERF - 8; i++) {
 				draw_interface(interface[i]);
 			}
 			scoreBoard(score, nameScoreBoard);

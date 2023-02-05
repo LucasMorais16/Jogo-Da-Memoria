@@ -55,5 +55,10 @@ void init_game_interface(ALLEGRO_BITMAP* interf_images[], Interface interface[NU
 			interface[i].x = (screen_w - INTERF_DIFFICULTY_W * 3.7) / 2 + (INTERF_DIFFICULTY_W + spacing);
 			interface[i].y = (screen_h - INTERF_DIFFICULTY_H * 1) / 2 + (INTERF_DIFFICULTY_H + spacing);
 		}
+		if (i == 12) {
+			interface[i].x = (screen_w - INTERF_MENU_W * 2) / 1.2 + (INTERF_MENU_W + spacing);
+			interface[i].y = (screen_h - INTERF_MENU_H * 2) / 1.2 + (INTERF_MENU_H + spacing);
+		}
+
 	}
 }
