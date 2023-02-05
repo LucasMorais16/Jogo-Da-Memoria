@@ -158,8 +158,6 @@ int main(int argc, char** argv) {
 
 			switch (event.type) {
 			case ALLEGRO_EVENT_KEY_DOWN:
-				std::cout << "Pressionando a tecla: " << al_keycode_to_name(event.keyboard.keycode) << ", tamanho: " << nameScoreBoard.size() << std::endl;
-
 				if (event.keyboard.keycode == 67) name_gotten = true;
 				if (event.keyboard.keycode == 63) { if (nameScoreBoard.size() != 0) nameScoreBoard.pop_back(); }
 				if (nameScoreBoard.size() < 12 && event.keyboard.keycode == 75) nameScoreBoard += " ";
