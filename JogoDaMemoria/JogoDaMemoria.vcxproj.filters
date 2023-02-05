@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\draws">
+      <UniqueIdentifier>{4821f53e-eece-415a-b197-c54a14a5c280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\getters">
+      <UniqueIdentifier>{d484b906-7de7-4a30-ac5a-4eb604657872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\initializers">
+      <UniqueIdentifier>{abc83b38-0fa7-47a7-af71-9c26a1e7b9b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{9ba8c972-2883-46ca-9fc1-5c948b15155d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\structs">
+      <UniqueIdentifier>{4b29d671-3d0e-4733-89b8-407b05a81414}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{29eb21a3-c983-409c-9df6-d1228fcfd6db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\draws">
+      <UniqueIdentifier>{7c4c84b3-d389-454f-a373-f3a598646a83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\getters">
+      <UniqueIdentifier>{866c364b-06c6-4c42-8a72-e164bb86f72e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\initializers">
+      <UniqueIdentifier>{b78942e5-1c09-4886-88c8-5f6f3b749e1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\menus">
+      <UniqueIdentifier>{45b51c91-4e78-4b2d-8368-c5c8423b0c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\menus">
+      <UniqueIdentifier>{46ddcd36-c3c7-41a9-a58a-7edf831642c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\docs">
+      <UniqueIdentifier>{9aeefafb-16b5-479f-9099-abea4dbdf13e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\docs">
+      <UniqueIdentifier>{627500bf-9f1d-41c5-936b-9f4bbcf2ea7f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="draw_interface.cpp">
+      <Filter>Source Files\draws</Filter>
+    </ClCompile>
+    <ClCompile Include="draw_card.cpp">
+      <Filter>Source Files\draws</Filter>
+    </ClCompile>
+    <ClCompile Include="get_file_name.cpp">
+      <Filter>Source Files\getters</Filter>
+    </ClCompile>
+    <ClCompile Include="get_player_name.cpp">
+      <Filter>Source Files\getters</Filter>
+    </ClCompile>
+    <ClCompile Include="init_game_cards.cpp">
+      <Filter>Source Files\initializers</Filter>
+    </ClCompile>
+    <ClCompile Include="init_game_interface.cpp">
+      <Filter>Source Files\initializers</Filter>
+    </ClCompile>
+    <ClCompile Include="scoreBoard.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="shuffle.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_inicial.cpp">
+      <Filter>Source Files\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="memorize_card.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="save_scoreboard.cpp">
+      <Filter>Source Files\docs</Filter>
+    </ClCompile>
+    <ClCompile Include="read_scoreboard.cpp">
+      <Filter>Source Files\docs</Filter>
+    </ClCompile>
+    <ClCompile Include="quickSort.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="difficulty.cpp">
+      <Filter>Source Files\menus</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="card.hpp">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.hpp">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="player.hpp">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="constantes.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="scoreBoard.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="shuffle.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="draw_interface.hpp">
+      <Filter>Header Files\draws</Filter>
+    </ClInclude>
+    <ClInclude Include="draw_card.hpp">
+      <Filter>Header Files\draws</Filter>
+    </ClInclude>
+    <ClInclude Include="get_player_name.hpp">
+      <Filter>Header Files\getters</Filter>
+    </ClInclude>
+    <ClInclude Include="get_file_name.hpp">
+      <Filter>Header Files\getters</Filter>
+    </ClInclude>
+    <ClInclude Include="init_game_interface.hpp">
+      <Filter>Header Files\initializers</Filter>
+    </ClInclude>
+    <ClInclude Include="init_game_cards.hpp">
+      <Filter>Header Files\initializers</Filter>
+    </ClInclude>
+    <ClInclude Include="menu_inicial.hpp">
+      <Filter>Header Files\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="memorize_card.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="save_scoreboard.hpp">
+      <Filter>Header Files\docs</Filter>
+    </ClInclude>
+    <ClInclude Include="read_scoreboard.hpp">
+      <Filter>Header Files\docs</Filter>
+    </ClInclude>
+    <ClInclude Include="quickSort.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="difficulty.hpp">
+      <Filter>Header Files\menus</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
