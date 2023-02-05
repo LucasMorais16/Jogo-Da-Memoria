@@ -145,6 +145,7 @@ int main(int argc, char** argv) {
 
 	if (!done) {
 		nameScoreBoard = get_player_name(event_queue, nameScoreBoard);
+		game_state.playerName = nameScoreBoard;
 		difficulty = menu_dificuldades(redraw, interface, event_queue);
 	}
 
@@ -210,6 +211,9 @@ int main(int argc, char** argv) {
 							game_cards[last_card].is_flipped = true;
 							if (num_matches == (NUM_CARDS / 2)) {
 								game_state.score = score;
+								if (!save_scoreboard(nameScoreBoard, score)) {
+									al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+								}
 								al_show_native_message_box(display, "Congratulations", "You have won the game!", "", NULL, ALLEGRO_MESSAGEBOX_WARN);
 								num_matches = 0;
 							}
@@ -259,9 +263,16 @@ int main(int argc, char** argv) {
 				}
 				//SAVE *****FAZER*****
 				if (x > interface[3].x && x < interface[3].x + INTERF_W && y > interface[3].y && y < interface[3].y + INTERF_H) {
-					if (!save_scoreboard(nameScoreBoard, score)) {
+					for (int i = 0; i < NUM_CARDS; i++) {
+						game_state.cards[i] = game_cards[i];
+					}
+					if (!save_game(game_state)) {
 						al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 					}
+					else {
+						al_show_native_message_box(display, "Success", "Game saved!", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+					}
+
 					break;
 				}
 				//CHANGE PLAYER *****FAZER*****

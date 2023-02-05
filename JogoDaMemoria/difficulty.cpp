@@ -18,10 +18,8 @@ int menu_dificuldades(bool redraw, const Interface interface[], ALLEGRO_EVENT_QU
 			return -1;
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
-			printf("bbbb ");
 			//EASY
 			if (x > interface[9].x && x < interface[9].x + INTERF_DIFFICULTY_W && y > interface[9].y && y < interface[9].y + INTERF_DIFFICULTY_H) {
-				printf("aaaa ");
 				return 0;
 			}
 			//NORMAL

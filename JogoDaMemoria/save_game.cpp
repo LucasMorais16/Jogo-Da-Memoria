@@ -1,4 +1,5 @@
 #include "save_game.hpp"
+#include <iostream>
 
 bool save_game(const Player& player) {
 	std::ofstream arquivo;

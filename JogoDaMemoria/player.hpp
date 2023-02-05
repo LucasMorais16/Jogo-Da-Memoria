@@ -3,10 +3,11 @@
 #include <string>
 #include <vector>
 #include "card.hpp"
+#include "constantes.hpp"
 
 typedef struct {
 	std::string playerName;
-	std::vector<Card> cards;
+	Card cards[NUM_CARDS];
 	int score;
 	int matches;
 } Player;
