@@ -19,20 +19,20 @@ bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_E
 				break;
 			case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 					//PLAY
-					if (x > interface[5].x && x < interface[5].x + INTERF_W && y > interface[5].y && y < interface[5].y + INTERF_H) {
+					if (x > interface[5].x && x < interface[5].x + INTERF_MENU_W && y > interface[5].y && y < interface[5].y + INTERF_MENU_H) {
 						done_menu = true;
 						return done;
 					}
 					//LOAD GAME
-					if (x > interface[6].x && x < interface[6].x + INTERF_W && y > interface[6].y && y < interface[6].y + INTERF_H) {
+					if (x > interface[6].x && x < interface[6].x + INTERF_MENU_W && y > interface[6].y && y < interface[6].y + INTERF_MENU_H) {
 						
 					}
 					//LEADERBOARD
-					if (x > interface[7].x && x < interface[7].x + INTERF_W && y > interface[7].y && y < interface[7].y + INTERF_H) {
+					if (x > interface[7].x && x < interface[7].x + INTERF_MENU_W && y > interface[7].y && y < interface[7].y + INTERF_MENU_H) {
 						
 					}
 					//QUIT
-					if (x > interface[8].x && x < interface[8].x + INTERF_W && y > interface[8].y && y < interface[8].y + INTERF_H) {
+					if (x > interface[8].x && x < interface[8].x + INTERF_MENU_W && y > interface[8].y && y < interface[8].y + INTERF_MENU_H) {
 						done = true;
 						return done;
 					}
