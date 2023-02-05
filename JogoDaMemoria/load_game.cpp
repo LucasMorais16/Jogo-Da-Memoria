@@ -1,7 +1,7 @@
 #include "load_game.hpp"
 
-Player load_game(std::string docName) {
-	std::ifstream arquivo(docName);
+Player load_game(std::string playerName) {
+	std::ifstream arquivo(playerName + ".dad");
 	std::string line;
 	Player player;
 
