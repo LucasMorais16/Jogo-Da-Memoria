@@ -18,6 +18,9 @@ std::string get_player_name(ALLEGRO_EVENT_QUEUE *event_queue, std::string nameSc
 		al_flip_display();
 
 		switch (event.type) {
+		case ALLEGRO_EVENT_DISPLAY_CLOSE:
+			return "a";
+			break;
 		case ALLEGRO_EVENT_KEY_DOWN:
 			if (event.keyboard.keycode == 67) name_gotten = true;
 			if (event.keyboard.keycode == 63) { if (nameScoreBoard.size() != 0) nameScoreBoard.pop_back(); }
@@ -27,6 +30,6 @@ std::string get_player_name(ALLEGRO_EVENT_QUEUE *event_queue, std::string nameSc
 			break;
 		}
 	}
-
+	al_destroy_font(name_font);
 	return nameScoreBoard;
 }

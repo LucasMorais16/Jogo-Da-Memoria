@@ -1,4 +1,5 @@
 #include "menu_inicial.hpp"
+#include "draw_leaderboard_table.hpp"
 
 bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue) {
 	bool done_menu = false;
@@ -16,12 +17,11 @@ bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_E
 				done_menu = true;
 				done = true;
 				return done;
-				break;
 			case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 					//PLAY
 					if (x > interface[5].x && x < interface[5].x + INTERF_MENU_W && y > interface[5].y && y < interface[5].y + INTERF_MENU_H) {
 						done_menu = true;
-						return done;
+						return done; //retorna falso pois ele é declarado como falso na função Main.cpp
 					}
 					//LOAD GAME
 					if (x > interface[6].x && x < interface[6].x + INTERF_MENU_W && y > interface[6].y && y < interface[6].y + INTERF_MENU_H) {
@@ -30,12 +30,9 @@ bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_E
 					//LEADERBOARD
 
 					if (x > interface[7].x && x < interface[7].x + INTERF_MENU_W && y > interface[7].y && y < interface[7].y + INTERF_MENU_H) {
-						bool leaderboard_done = false;
-						while (!leaderboard_done) {
-							draw_leaderboard_table();
-							if (x > interface[9].x && x < interface[9].x + INTERF_W && y > interface[9].y && y < interface[9].y + INTERF_H) {
-								leaderboard_done = true;
-							}
+						done = draw_leaderboard_table(redraw, interface, event_queue);
+						if (done == true) {
+							return done;
 						}
 					}
 					//QUIT
@@ -52,7 +49,7 @@ bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_E
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 			al_clear_to_color(al_map_rgb(255, 255, 255));
-			for (int i = 5; i < NUM_INTERF - 3; i++) {
+			for (int i = 5; i < NUM_INTERF - 4; i++) {
 				draw_interface(interface[i]);
 			}
 			al_flip_display();

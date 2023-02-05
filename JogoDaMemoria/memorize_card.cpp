@@ -9,7 +9,7 @@ void memorizeCards(Card game_cards[NUM_CARDS], Interface interface[NUM_INTERF], 
 	for (int i = 0; i < NUM_CARDS; i++) {
 		draw_card(game_cards[i]);
 	}
-	for (int i = 0; i < NUM_INTERF - 7; i++) {
+	for (int i = 0; i < NUM_INTERF - 8; i++) {
 		draw_interface(interface[i]);
 	}
 	for (int i = 0; i < NUM_CARDS; i++) {

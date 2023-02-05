@@ -2,7 +2,7 @@
 
 #include <string>
 
-const int NUM_INTERF = 12;
+const int NUM_INTERF = 13;
 const int INTERF_W = 100;
 const int INTERF_H = 30;
 const int INTERF_DIFFICULTY_W = 200;

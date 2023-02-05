@@ -39,7 +39,7 @@ int menu_dificuldades(bool redraw, const Interface interface[], ALLEGRO_EVENT_QU
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 			al_clear_to_color(al_map_rgb(255, 255, 255));
-			for (int i = 9; i < NUM_INTERF; i++) {
+			for (int i = 9; i < NUM_INTERF - 1; i++) {
 				draw_interface(interface[i]);
 			}
 			al_flip_display();
