@@ -9,13 +9,13 @@ std::vector<Player> read_scoreboard() {
 	if (!arquivo.is_open()) return players;
 
 	int i = 0;
-	while(getline(arquivo, line)) {
+	while (getline(arquivo, line)) {
 		std::istringstream ss(line);
-		
+
 		while (getline(ss, cell, ';')) {
-			if(i == 0) player.playerName = cell;
+			if (i == 0) player.playerName = cell;
 			if (i == 1) player.score = stoi(cell);
-			
+
 			i++;
 		}
 
