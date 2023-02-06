@@ -30,8 +30,6 @@ std::string get_player_name(ALLEGRO_EVENT_QUEUE *event_queue, std::string nameSc
 
 				break;
 
-			case ALLEGRO_EVENT_MOUSE_BUTTON_UP:;
-
 		}
 	}
 	al_destroy_font(name_font);
