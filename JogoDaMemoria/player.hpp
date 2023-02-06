@@ -7,7 +7,7 @@
 
 typedef struct {
 	std::string playerName;
-	Card cards[NUM_CARDS];
 	int score;
 	int matches;
+	Card cards[NUM_CARDS];
 } Player;
