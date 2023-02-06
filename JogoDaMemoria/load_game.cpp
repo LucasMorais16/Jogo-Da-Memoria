@@ -1,9 +1,8 @@
 #include "load_game.hpp"
-#include <iostream>
 
 Player load_game(std::string docName) {
 	std::ifstream arquivo(docName);
-	std::string line;
+	std::string card;
 	Player player;
 
 	if (!arquivo.is_open()) return player;
@@ -17,7 +16,8 @@ Player load_game(std::string docName) {
 		arquivo >> player.cards[i].id;
 		arquivo >> player.cards[i].x;
 		arquivo >> player.cards[i].y;
-		//arquivo >> player.cards[i].front_image;
+		arquivo >> card;
+		player.cards[i].front_image = al_load_bitmap(card.c_str());
 	}
 
 	arquivo.close();

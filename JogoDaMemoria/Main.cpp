@@ -106,10 +106,11 @@ int main(int argc, char** argv) {
 	init_game_interface(interf_images, interface, 60, screen_w, screen_h);
 
 	ALLEGRO_BITMAP* card_images[NUM_CARDS / 2];
-	for (int i = 0; i < NUM_CARDS / 2; i++) {
+	for (int i = 0; i < NUM_CARDS / 2; i++) { //fazer igual a isso
 		char filename[256];
 		sprintf_s(filename, "card%d.png", i);
 		card_images[i] = al_load_bitmap(filename);
+
 		if (!card_images[i]) {
 			al_show_native_message_box(display, "Error", "Could not load card image", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 			al_destroy_display(display);
@@ -121,7 +122,9 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 	}
-	init_game_cards(card_images, game_cards, 50, screen_w, screen_h);
+
+	std::string vetor[NUM_CARDS];
+	init_game_cards(card_images, game_cards, vetor, 50, screen_w, screen_h);
 
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_mouse_event_source());
@@ -258,7 +261,7 @@ int main(int argc, char** argv) {
 						selected_card = -1;
 
 					}
-					shuffle(game_cards);
+					shuffle(game_cards, vetor);
 					memorize = true;
 					if (memorize && difficulty != 2) {
 						memorizeCards(game_cards, interface, memorize_timer);
@@ -271,7 +274,7 @@ int main(int argc, char** argv) {
 					for (int i = 0; i < NUM_CARDS; i++) {
 						game_state.cards[i] = game_cards[i];
 					}
-					if (!save_game(game_state)) {
+					if (!save_game(game_state, vetor)) {
 						al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 					}
 					else {
@@ -283,8 +286,9 @@ int main(int argc, char** argv) {
 				//LOAD GAME *****FAZER*****
 				if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
 					std::string filename = get_file_name(display);
-					std::cout << game_state.playerName << std::endl;
-					std::cout << game_state.score << std::endl;
+					for (int i = 0; i < NUM_CARDS; i++) {
+						std::cout << vetor[i] << std::endl;
+					}
 					game_state = load_game(filename);
 					score = game_state.score;
 					nameScoreBoard = game_state.playerName;
