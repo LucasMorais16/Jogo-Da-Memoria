@@ -170,7 +170,15 @@ int main(int argc, char** argv) {
 			}
 			if (difficulty == 0) {
 				memorize_timer = 10000;
+				increase_score = 62;
+				decrease_score = 12;
 			}
+			if (difficulty == 1) {
+				increase_score = 87; //maximo = 696 pontos.
+				decrease_score = 17;
+			}
+
+
 		}
 
 		//Jogo
@@ -240,7 +248,7 @@ int main(int argc, char** argv) {
 								}
 								al_flip_display();
 								al_rest(1.0);
-								score -= 25;
+								score -= decrease_score;
 								game_cards[i].is_flipped = false;
 								game_cards[last_card].is_flipped = false;
 								last_card = -1;
