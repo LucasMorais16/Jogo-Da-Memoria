@@ -6,9 +6,6 @@ Player load_game(std::string docName) {
 	std::string card;
 	Player player;
 
-	
-
-
 	if (!arquivo.is_open()) return player;
 
 	arquivo >> player.playerName;
@@ -21,15 +18,13 @@ Player load_game(std::string docName) {
 		arquivo >> player.cards[i].id;
 		arquivo >> player.cards[i].x;
 		arquivo >> player.cards[i].y;
-		//arquivo >> player.cards[i].front_image;
-		arquivo >> player.cards[i].card_name; //aqui tá devolvendo o valor correto do arquivo
-		std::cout << player.cards[i].card_name << std::endl;
-		//player.cards[i].front_image = al_load_bitmap(card.c_str());
-
 	}
-	std::cout << " " << std::endl;
-
 	arquivo.close();
+
+	for (int i = 0; i < NUM_CARDS; i++) {
+		std::string nome = "bitmap_image" + std::to_string(i) + ".bmp";
+		player.cards[i].front_image = al_load_bitmap(nome.c_str());
+	}
 
 	return player;
 }

@@ -311,11 +311,7 @@ int main(int argc, char** argv) {
 					//LOAD GAME *****FAZER*****
 					if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
 						std::string filename = get_file_name(display);
-						std::cout << "VETOR ANTES" << std::endl;
-						for (int i = 0; i < NUM_CARDS; i++) {
-							std::cout << vetor[i] << std::endl;
-						}
-						std::cout << " " << std::endl;
+
 						game_state = load_game(filename);
 						score = game_state.score;
 						nameScoreBoard = game_state.playerName;
@@ -326,11 +322,7 @@ int main(int argc, char** argv) {
 							game_cards[i].x = game_state.cards[i].x;
 							game_cards[i].y = game_state.cards[i].y;
 							game_cards[i].id = game_state.cards[i].id;
-							//game_cards[i].front_image = al_load_bitmap(game_state.cards[i].card_name.c_str());
-							std::cout << game_state.cards[i].card_name << " ";
-							std::cout << game_cards[i].front_image << std::endl;
-
-
+							game_cards[i].front_image = game_state.cards[i].front_image;
 						}
 
 						break;
