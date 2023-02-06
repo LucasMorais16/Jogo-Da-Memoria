@@ -18,16 +18,20 @@ std::string get_player_name(ALLEGRO_EVENT_QUEUE *event_queue, std::string nameSc
 		al_flip_display();
 
 		switch (event.type) {
-		case ALLEGRO_EVENT_DISPLAY_CLOSE:
-			return "a";
-			break;
-		case ALLEGRO_EVENT_KEY_DOWN:
-			if (event.keyboard.keycode == 67) name_gotten = true;
-			if (event.keyboard.keycode == 63) { if (nameScoreBoard.size() != 0) nameScoreBoard.pop_back(); }
-			if (nameScoreBoard.size() < 12 && event.keyboard.keycode == 75) nameScoreBoard += " ";
-			if (nameScoreBoard.size() < 12 && event.keyboard.keycode >= 1 && event.keyboard.keycode <= 36) nameScoreBoard += al_keycode_to_name(event.keyboard.keycode);
+			case ALLEGRO_EVENT_DISPLAY_CLOSE:
+				return "a";
+				break;
 
-			break;
+			case ALLEGRO_EVENT_KEY_DOWN:
+				if (event.keyboard.keycode == 67) name_gotten = true;
+				if (event.keyboard.keycode == 63) { if (nameScoreBoard.size() != 0) nameScoreBoard.pop_back(); }
+				if (nameScoreBoard.size() < 12 && event.keyboard.keycode == 75) nameScoreBoard += "_";
+				if (nameScoreBoard.size() < 12 && event.keyboard.keycode >= 1 && event.keyboard.keycode <= 36) nameScoreBoard += al_keycode_to_name(event.keyboard.keycode);
+
+				break;
+
+			case ALLEGRO_EVENT_MOUSE_BUTTON_UP:;
+
 		}
 	}
 	al_destroy_font(name_font);
