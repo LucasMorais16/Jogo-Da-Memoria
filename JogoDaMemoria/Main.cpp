@@ -29,16 +29,11 @@ int main(int argc, char** argv) {
 	Player game_state;
 	Interface interface[NUM_INTERF];
 
-	int selected_card = -1;
-	int last_card = -1;
-	int num_matches = 0;
-
 	ALLEGRO_DISPLAY* display = NULL;
 	ALLEGRO_EVENT_QUEUE* event_queue = NULL;
 	ALLEGRO_TIMER* timer = NULL;
 	//Player game_state;
-	bool done = false;
-	bool redraw = true;
+	
 
 	if (!al_init()) {
 		al_show_native_message_box(display, "Error", "Could not initialize Allegro 5", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
@@ -132,203 +127,226 @@ int main(int argc, char** argv) {
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 
 	al_start_timer(timer);
+	bool done_game = false;
+	do
+	{
+		int pair = 0; //par de 2 loops
+		int score = 0;
+		int difficulty = -1;
+		int memorize_timer = 5000;
+		int increase_score = 125;
+		int decrease_score = 25;
+		bool memorize = true;
+		bool done = false;
+		bool redraw = true;
+		int selected_card = -1;
+		int last_card = -1;
+		int num_matches = 0;
+		std::string nameScoreBoard;
+		std::string player_name;
 
-	int pair = 0; //par de 2 loops
-	int score = 0;
-	int difficulty = -1;
-	int memorize_timer = 5000;
-	int increase_score = 125;
-	int decrease_score = 25;
-	bool memorize = true;
-	std::string nameScoreBoard;
-	std::string player_name;
+		game_state.score = 0;
 
-	game_state.score = 0;
+		done = menu_inicial(done, redraw, interface, event_queue);
 
-	done = menu_inicial(done, redraw, interface, event_queue);
-
-	if (!done) {
-		nameScoreBoard = get_player_name(event_queue, nameScoreBoard);
-		if (nameScoreBoard != "a") {
-			game_state.playerName = nameScoreBoard;
-		}
-		else {
-			done = true;
-		}
-	}
-
-	if (!done) {
-		difficulty = menu_dificuldades(redraw, interface, event_queue);
-		if (difficulty == -1) {
-			done = true;
-		}
-		if (difficulty == 0) {
-			memorize_timer = 10000;
-		}
-	}
-
-	//Jogo
-	while (!done) {
-		ALLEGRO_EVENT event;
-		al_wait_for_event(event_queue, &event);
-
-		if (memorize && difficulty != 2) {
-			memorizeCards(game_cards, interface, memorize_timer);
-			memorize = false;
+		if (done == true) {
+			done_game = true;
 		}
 
-		game_state.matches = num_matches;
-
-		if (game_state.score <= score) {
-			game_state.score = score;
+		if (!done) {
+			nameScoreBoard = get_player_name(event_queue, nameScoreBoard);
+			if (nameScoreBoard != "a") {
+				game_state.playerName = nameScoreBoard;
+			}
+			else {
+				done = true;
+			}
 		}
 
-		if (pair == 2) {
-			last_card = -1;
-			selected_card = -1;
-			pair = 0;
+		if (!done) {
+			difficulty = menu_dificuldades(redraw, interface, event_queue);
+			if (difficulty == -1) {
+				done = true;
+			}
+			if (difficulty == 0) {
+				memorize_timer = 10000;
+			}
 		}
 
-		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-			done = true;
-		}
-		else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-			int x = event.mouse.x;
-			int y = event.mouse.y;
+		//Jogo
+		while (!done) {
+			ALLEGRO_EVENT event;
+			al_wait_for_event(event_queue, &event);
 
-			//for -> cartas
-			for (int i = 0; i < NUM_CARDS; i++) {
-				if (x > game_cards[i].x && x < game_cards[i].x + CARD_W && y > game_cards[i].y && y < game_cards[i].y + CARD_H && game_cards[i].is_flipped == false) {
-					pair++;
-					if (selected_card == -1) {
-						game_cards[i].is_flipped = true;
-						redraw = true;
-						selected_card = i;
-					}
-					else if (selected_card != -1 && game_cards[i].is_flipped == false) {
-						game_cards[i].is_flipped = true;
-						redraw = true;
-						last_card = selected_card;
-						selected_card = i;
-						//Se as cartas forem iguais, entra aqui.
-						if (game_cards[i].id == game_cards[last_card].id) {
-							score += increase_score;
-							num_matches++;
-							game_state.matches = num_matches;
+			if (memorize && difficulty != 2) {
+				memorizeCards(game_cards, interface, memorize_timer);
+				memorize = false;
+			}
+
+			game_state.matches = num_matches;
+
+			if (game_state.score <= score) {
+				game_state.score = score;
+			}
+
+			if (pair == 2) {
+				last_card = -1;
+				selected_card = -1;
+				pair = 0;
+			}
+
+			if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+				done_game = true;
+				done = true;
+			}
+			else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+				int x = event.mouse.x;
+				int y = event.mouse.y;
+
+				//for -> cartas
+				for (int i = 0; i < NUM_CARDS; i++) {
+					if (x > game_cards[i].x && x < game_cards[i].x + CARD_W && y > game_cards[i].y && y < game_cards[i].y + CARD_H && game_cards[i].is_flipped == false) {
+						pair++;
+						if (selected_card == -1) {
 							game_cards[i].is_flipped = true;
-							game_cards[last_card].is_flipped = true;
-							if (num_matches == (NUM_CARDS / 2)) {
-								game_state.score = score;
-								if (!save_scoreboard(nameScoreBoard, score)) {
-									al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+							redraw = true;
+							selected_card = i;
+						}
+						else if (selected_card != -1 && game_cards[i].is_flipped == false) {
+							game_cards[i].is_flipped = true;
+							redraw = true;
+							last_card = selected_card;
+							selected_card = i;
+							//Se as cartas forem iguais, entra aqui.
+							if (game_cards[i].id == game_cards[last_card].id) {
+								score += increase_score;
+								num_matches++;
+								game_state.matches = num_matches;
+								game_cards[i].is_flipped = true;
+								game_cards[last_card].is_flipped = true;
+								if (num_matches == (NUM_CARDS / 2)) {
+									game_state.score = score;
+									if (!save_scoreboard(nameScoreBoard, score)) {
+										al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+									}
+									al_show_native_message_box(display, "Congratulations", "You have won the game!", "", NULL, ALLEGRO_MESSAGEBOX_WARN);
+									num_matches = 0;
 								}
-								al_show_native_message_box(display, "Congratulations", "You have won the game!", "", NULL, ALLEGRO_MESSAGEBOX_WARN);
-								num_matches = 0;
+							}
+							else {
+								game_cards[i].is_flipped = true;
+								for (int i = 0; i < NUM_CARDS; i++) {
+									draw_card(game_cards[i]);
+								}
+								al_flip_display();
+								al_rest(1.0);
+								score -= 25;
+								game_cards[i].is_flipped = false;
+								game_cards[last_card].is_flipped = false;
+								last_card = -1;
+								selected_card = -1;
 							}
 						}
-						else {
-							game_cards[i].is_flipped = true;
-							for (int i = 0; i < NUM_CARDS; i++) {
-								draw_card(game_cards[i]);
-							}
-							al_flip_display();
-							al_rest(1.0);
-							score -= 25;
+						break;
+					}
+				}
+
+				//for -> interface
+				for (int i = 0; i < NUM_INTERF - 2; i++) { //NUM_INTERF - 2 porque remove-se os dois botões de PLAY e QUIT do menu inicial.
+					//QUIT
+					if (x > interface[1].x && x < interface[1].x + INTERF_W && y > interface[1].y && y < interface[1].y + INTERF_H) {
+						for (int i = 0; i < NUM_CARDS; i++) {
+							num_matches = 0;
+							score = 0;
 							game_cards[i].is_flipped = false;
-							game_cards[last_card].is_flipped = false;
 							last_card = -1;
 							selected_card = -1;
+
 						}
+						shuffle(game_cards, vetor);
+						done_game = false;
+						done = true;
+						break;
 					}
-					break;
+					//RESET
+					if (x > interface[2].x && x < interface[2].x + INTERF_W && y > interface[2].y && y < interface[2].y + INTERF_H) {
+						for (int i = 0; i < NUM_CARDS; i++) {
+							num_matches = 0;
+							score = 0;
+							game_cards[i].is_flipped = false;
+							last_card = -1;
+							selected_card = -1;
+
+						}
+						shuffle(game_cards, vetor);
+						memorize = true;
+						if (memorize && difficulty != 2) {
+							memorizeCards(game_cards, interface, memorize_timer);
+							memorize = false;
+						}
+						break;
+					}
+					//SAVE 
+					if (x > interface[3].x && x < interface[3].x + INTERF_W && y > interface[3].y && y < interface[3].y + INTERF_H) {
+						for (int i = 0; i < NUM_CARDS; i++) {
+							game_state.cards[i] = game_cards[i];
+						}
+						if (!save_game(game_state, vetor)) {
+							al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+						}
+						else {
+							al_show_native_message_box(display, "Success", "Game saved!", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+						}
+
+						break;
+					}
+					//LOAD GAME *****FAZER*****
+					if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
+						std::string filename = get_file_name(display);
+						std::cout << "VETOR ANTES" << std::endl;
+						for (int i = 0; i < NUM_CARDS; i++) {
+							std::cout << vetor[i] << std::endl;
+						}
+						std::cout << " " << std::endl;
+						game_state = load_game(filename);
+						score = game_state.score;
+						nameScoreBoard = game_state.playerName;
+						num_matches = game_state.matches;
+
+						for (int i = 0; i < NUM_CARDS; i++) {
+							game_cards[i].is_flipped = game_state.cards[i].is_flipped;
+							game_cards[i].x = game_state.cards[i].x;
+							game_cards[i].y = game_state.cards[i].y;
+							game_cards[i].id = game_state.cards[i].id;
+							//game_cards[i].front_image = al_load_bitmap(game_state.cards[i].card_name.c_str());
+							std::cout << game_state.cards[i].card_name << " ";
+							std::cout << game_cards[i].front_image << std::endl;
+
+
+						}
+
+						break;
+					}
 				}
 			}
+			else if (event.type == ALLEGRO_EVENT_TIMER) {
+				redraw = true;
+			}
 
-			//for -> interface
-			for (int i = 0; i < NUM_INTERF - 2; i++) { //NUM_INTERF - 2 porque remove-se os dois botões de PLAY e QUIT do menu inicial.
-				//QUIT
-				if (x > interface[1].x && x < interface[1].x + INTERF_W && y > interface[1].y && y < interface[1].y + INTERF_H) {
-					done = true;
-					break;
+			if (redraw && al_is_event_queue_empty(event_queue)) {
+				redraw = false;
+				al_clear_to_color(al_map_rgb(255, 255, 255));
+				for (int i = 0; i < NUM_CARDS; i++) {
+					draw_card(game_cards[i]);
 				}
-				//RESET
-				if (x > interface[2].x && x < interface[2].x + INTERF_W && y > interface[2].y && y < interface[2].y + INTERF_H) {
-					for (int i = 0; i < NUM_CARDS; i++) {
-						num_matches = 0;
-						score = 0;
-						game_cards[i].is_flipped = false;
-						last_card = -1;
-						selected_card = -1;
-
-					}
-					shuffle(game_cards, vetor);
-					memorize = true;
-					if (memorize && difficulty != 2) {
-						memorizeCards(game_cards, interface, memorize_timer);
-						memorize = false;
-					}
-					break;
+				for (int i = 0; i < NUM_INTERF - 8; i++) {
+					draw_interface(interface[i]);
 				}
-				//SAVE 
-				if (x > interface[3].x && x < interface[3].x + INTERF_W && y > interface[3].y && y < interface[3].y + INTERF_H) {
-					for (int i = 0; i < NUM_CARDS; i++) {
-						game_state.cards[i] = game_cards[i];
-					}
-					if (!save_game(game_state, vetor)) {
-						al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
-					}
-					else {
-						al_show_native_message_box(display, "Success", "Game saved!", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
-					}
-
-					break;
-				}
-				//LOAD GAME *****FAZER*****
-				if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
-					std::string filename = get_file_name(display);
-					std::cout << "VETOR ANTES" << std::endl;
-					for (int i = 0; i < NUM_CARDS; i++) {
-						std::cout << vetor[i] << std::endl;
-					}
-					std::cout << " " << std::endl;
-					game_state = load_game(filename);
-					score = game_state.score;
-					nameScoreBoard = game_state.playerName;
-					num_matches = game_state.matches;
-
-					for (int i = 0; i < NUM_CARDS; i++) {
-						game_cards[i].is_flipped = game_state.cards[i].is_flipped;
-						game_cards[i].x = game_state.cards[i].x;
-						game_cards[i].y = game_state.cards[i].y;
-						game_cards[i].id = game_state.cards[i].id;
-						//game_cards[i].front_image = al_load_bitmap(game_state.cards[i].card_name.c_str());
-						std::cout << game_state.cards[i].card_name << " ";
-						std::cout << game_cards[i].front_image << std::endl;
-
-
-					}
-
-					break;
-				}
+				scoreBoard(score, nameScoreBoard);
+				al_flip_display();
 			}
 		}
-		else if (event.type == ALLEGRO_EVENT_TIMER) {
-			redraw = true;
-		}
-
-		if (redraw && al_is_event_queue_empty(event_queue)) {
-			redraw = false;
-			al_clear_to_color(al_map_rgb(255, 255, 255));
-			for (int i = 0; i < NUM_CARDS; i++) {
-				draw_card(game_cards[i]);
-			}
-			for (int i = 0; i < NUM_INTERF - 8; i++) {
-				draw_interface(interface[i]);
-			}
-			scoreBoard(score, nameScoreBoard);
-			al_flip_display();
-		}
-	}
+	} while (done_game == false);
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
 	al_destroy_timer(timer);
