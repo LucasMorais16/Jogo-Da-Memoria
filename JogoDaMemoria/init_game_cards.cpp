@@ -2,8 +2,6 @@
 
 void init_game_cards(ALLEGRO_BITMAP* card_images[], Card game_cards[NUM_CARDS],
 	std::string teste_cartas[NUM_CARDS], const int spacing, const int screen_w, const int screen_h) {
-	
-	srand(time(NULL));
 
 	for (int i = 0; i < NUM_CARDS; i++) {
 		game_cards[i].id = i % (NUM_CARDS / 2);

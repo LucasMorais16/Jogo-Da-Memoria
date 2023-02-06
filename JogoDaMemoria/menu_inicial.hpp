@@ -5,6 +5,7 @@
 #include "draw_interface.hpp"
 #include "interface.hpp"
 #include "constantes.hpp"
+#include "player.hpp"
 
 bool menu_inicial(bool done, bool redraw,
 	const Interface interface[], 

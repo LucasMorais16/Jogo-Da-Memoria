@@ -2,6 +2,7 @@
 
 #include <allegro5/bitmap.h>
 #include <string>
+#include "constantes.hpp"
 
 typedef struct {
 	int id;

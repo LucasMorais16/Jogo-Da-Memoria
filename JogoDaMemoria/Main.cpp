@@ -105,8 +105,8 @@ int main(int argc, char** argv) {
 	}
 	init_game_interface(interf_images, interface, 60, screen_w, screen_h);
 
-	ALLEGRO_BITMAP* card_images[NUM_CARDS / 2];
-	for (int i = 0; i < NUM_CARDS / 2; i++) { //fazer igual a isso
+	ALLEGRO_BITMAP* card_images[NUM_CARDS];
+	for (int i = 0; i < NUM_CARDS; i++) { //fazer igual a isso
 		char filename[256];
 		sprintf_s(filename, "card%d.png", i);
 		card_images[i] = al_load_bitmap(filename);
@@ -286,19 +286,28 @@ int main(int argc, char** argv) {
 				//LOAD GAME *****FAZER*****
 				if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
 					std::string filename = get_file_name(display);
+					std::cout << "VETOR ANTES" << std::endl;
 					for (int i = 0; i < NUM_CARDS; i++) {
 						std::cout << vetor[i] << std::endl;
 					}
+					std::cout << " " << std::endl;
 					game_state = load_game(filename);
 					score = game_state.score;
 					nameScoreBoard = game_state.playerName;
+					num_matches = game_state.matches;
+
 					for (int i = 0; i < NUM_CARDS; i++) {
 						game_cards[i].is_flipped = game_state.cards[i].is_flipped;
 						game_cards[i].x = game_state.cards[i].x;
 						game_cards[i].y = game_state.cards[i].y;
 						game_cards[i].id = game_state.cards[i].id;
+						//game_cards[i].front_image = al_load_bitmap(game_state.cards[i].card_name.c_str());
+						std::cout << game_state.cards[i].card_name << " ";
+						std::cout << game_cards[i].front_image << std::endl;
+
 
 					}
+
 					break;
 				}
 			}
