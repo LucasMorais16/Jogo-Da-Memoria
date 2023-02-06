@@ -266,7 +266,7 @@ int main(int argc, char** argv) {
 					}
 					break;
 				}
-				//SAVE *****FAZER*****
+				//SAVE 
 				if (x > interface[3].x && x < interface[3].x + INTERF_W && y > interface[3].y && y < interface[3].y + INTERF_H) {
 					for (int i = 0; i < NUM_CARDS; i++) {
 						game_state.cards[i] = game_cards[i];
@@ -280,12 +280,17 @@ int main(int argc, char** argv) {
 
 					break;
 				}
-				//CHANGE PLAYER *****FAZER*****
+				//LOAD GAME *****FAZER*****
 				if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
-					std::string file_name = get_file_name(display);
-					//game_state = load_game(file_name);
-					std::cout << "Type your name: ";
-					std::cin >> nameScoreBoard;
+					std::string filename = get_file_name(display);
+					std::cout << game_state.playerName << std::endl;
+					std::cout << game_state.score << std::endl;
+					game_state = load_game(filename);
+					score = game_state.score;
+					nameScoreBoard = game_state.playerName;
+					for (int i = 0; i < NUM_CARDS; i++) {
+						game_cards[i] = game_state.cards[i];
+					}
 					break;
 				}
 			}
