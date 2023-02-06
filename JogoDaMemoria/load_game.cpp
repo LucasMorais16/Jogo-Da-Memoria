@@ -17,7 +17,7 @@ Player load_game(std::string docName) {
 		arquivo >> player.cards[i].id;
 		arquivo >> player.cards[i].x;
 		arquivo >> player.cards[i].y;
-		arquivo >> player.cards[i].front_image;
+		//arquivo >> player.cards[i].front_image;
 	}
 
 	arquivo.close();

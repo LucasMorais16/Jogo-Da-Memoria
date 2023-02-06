@@ -1,5 +1,9 @@
 #include "save_game.hpp"
 #include <iostream>
+#include <vector>
+#include <allegro5/bitmap.h>
+#include <allegro5/allegro.h>
+
 
 bool save_game(const Player& player) {
 	std::ofstream arquivo;

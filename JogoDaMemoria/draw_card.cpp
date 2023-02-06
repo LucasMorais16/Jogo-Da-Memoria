@@ -1,6 +1,6 @@
 #include "draw_card.hpp"
 
-void draw_card(const Card card) {
+void draw_card(Card card) {
 	if (card.is_flipped) {
 		al_draw_bitmap(card.front_image, card.x, card.y, 0);
 		return;

@@ -258,7 +258,7 @@ int main(int argc, char** argv) {
 						selected_card = -1;
 
 					}
-					shuffle(card_images, game_cards);
+					shuffle(game_cards);
 					memorize = true;
 					if (memorize && difficulty != 2) {
 						memorizeCards(game_cards, interface, memorize_timer);
@@ -289,7 +289,11 @@ int main(int argc, char** argv) {
 					score = game_state.score;
 					nameScoreBoard = game_state.playerName;
 					for (int i = 0; i < NUM_CARDS; i++) {
-						game_cards[i] = game_state.cards[i];
+						game_cards[i].is_flipped = game_state.cards[i].is_flipped;
+						game_cards[i].x = game_state.cards[i].x;
+						game_cards[i].y = game_state.cards[i].y;
+						game_cards[i].id = game_state.cards[i].id;
+
 					}
 					break;
 				}

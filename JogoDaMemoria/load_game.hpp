@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <string>
+#include <allegro5/allegro.h>
 #include "player.hpp"
 #include "constantes.hpp"
 
