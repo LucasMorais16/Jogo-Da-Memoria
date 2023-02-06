@@ -40,8 +40,8 @@ bool draw_leaderboard_table(bool redraw, const Interface interface[], ALLEGRO_EV
 
 			std::vector<Player>players = read_scoreboard();
 			
-			if (players.size() > 0) {
-				for (int i = 1; i < players.size() && i < 11; i++) {
+			if (players.size()+1 > 0) {
+				for (int i = 1; i < players.size()+1 && i < 11; i++) {
 					_itoa_s(i, rank, 10);
 					al_draw_textf(body_font, al_map_rgb(0, 0, 0), 380, (i * 60) + 110, ALLEGRO_ALIGN_CENTRE, rank);
 
