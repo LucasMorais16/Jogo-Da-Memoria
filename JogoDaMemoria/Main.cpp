@@ -100,13 +100,13 @@ int main(int argc, char** argv) {
 	}
 	init_game_interface(interf_images, interface, 60, screen_w, screen_h);
 
-	ALLEGRO_BITMAP* card_images[NUM_CARDS];
+	Card card_images[NUM_CARDS];
 	for (int i = 0; i < NUM_CARDS; i++) { //fazer igual a isso
 		char filename[256];
 		sprintf_s(filename, "card%d.png", i);
-		card_images[i] = al_load_bitmap(filename);
+		card_images[i].front_image = al_load_bitmap(filename);
 
-		if (!card_images[i]) {
+		/*if (!card_images[i]) {
 			al_show_native_message_box(display, "Error", "Could not load card image", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 			al_destroy_display(display);
 			al_destroy_event_queue(event_queue);
@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
 				al_destroy_bitmap(card_images[j]);
 			}
 			return -1;
-		}
+		}*/
 	}
 
 	std::string vetor[NUM_CARDS];
@@ -351,9 +351,9 @@ int main(int argc, char** argv) {
 	al_destroy_event_queue(event_queue);
 	al_destroy_timer(timer);
 
-	for (int i = 0; i < (NUM_CARDS / 2); i++) {
+	/*for (int i = 0; i < (NUM_CARDS / 2); i++) {
 		al_destroy_bitmap(card_images[i]);
-	}
+	}*/
 
 	return 0;
 }

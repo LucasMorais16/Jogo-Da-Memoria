@@ -48,7 +48,7 @@ bool draw_leaderboard_table(bool redraw, const Interface interface[], ALLEGRO_EV
 					al_draw_rectangle(400, (60 * i) + 100, 990, (60 * i) + 150, al_map_rgb(100, 100, 100), 3);
 					al_draw_rectangle(1010, (60 * i) + 100, 1200, (60 * i) + 150, al_map_rgb(100, 100, 100), 3);
 
-					al_draw_textf(body_font, al_map_rgb(0, 0, 0), 450, 110 + i * 60, ALLEGRO_ALIGN_LEFT, players[i-1].playerName.c_str());
+					al_draw_textf(body_font, al_map_rgb(0, 0, 0), 450, 110 + i * 60, ALLEGRO_ALIGN_LEFT, "\n%s" ,players[i - 1].playerName.c_str());
 					al_draw_textf(body_font, al_map_rgb(0, 0, 0), 1100, 110 + i * 60, ALLEGRO_ALIGN_CENTRE, "%d", players[i - 1].score);
 				}
 			}

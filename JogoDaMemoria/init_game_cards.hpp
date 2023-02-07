@@ -5,6 +5,7 @@
 #include "card.hpp"
 #include "shuffle.hpp"
 #include "constantes.hpp"
+#include "card.hpp"
 
-void init_game_cards(ALLEGRO_BITMAP* card_images[], Card game_cards[NUM_CARDS],
+void init_game_cards(Card card_images[NUM_CARDS], Card game_cards[NUM_CARDS],
 	std::string teste_cartas[NUM_CARDS], const int spacing, const int screen_w, const int screen_h);
