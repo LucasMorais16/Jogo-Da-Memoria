@@ -6,4 +6,4 @@
 #include "player.hpp"
 #include "constantes.hpp"
 
-Player load_game(std::string docName);
+Player load_game(std::string& docName);

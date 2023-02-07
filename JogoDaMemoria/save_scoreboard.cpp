@@ -1,22 +1,17 @@
 #include "save_scoreboard.hpp"
 
 bool save_scoreboard(const std::string& playerName,const int& score) {
-	std::ofstream arquivo;
+	std::ofstream document;
 
-	arquivo.open("scoreBoard.csv", std::ios_base::out | std::ios_base::app);
+	document.open("scoreBoard.csv", std::ios_base::out | std::ios_base::app);
 
-	if (!arquivo.is_open()) {
-		arquivo.close();
+	if (!document.is_open()) {
+		document.close();
 		return false;
 	}
 
-	arquivo << playerName << ";" << score << ";" << std::endl;
+	document << playerName << ";" << score << ";" << std::endl;
 
-	if (!arquivo) {
-		arquivo.close();
-		return false;
-	}
-
-	arquivo.close();
+	document.close();
 	return true;
 }

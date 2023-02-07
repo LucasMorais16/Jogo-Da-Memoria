@@ -1,6 +1,6 @@
 #include "get_player_name.hpp"
 
-std::string get_player_name(ALLEGRO_EVENT_QUEUE *event_queue, std::string nameScoreBoard) {
+std::string get_player_name(ALLEGRO_EVENT_QUEUE *event_queue, std::string& nameScoreBoard) {
 	bool name_gotten = false;
 	ALLEGRO_FONT* name_font = al_load_font("arial.ttf", 50, 0);
 
@@ -18,20 +18,22 @@ std::string get_player_name(ALLEGRO_EVENT_QUEUE *event_queue, std::string nameSc
 		al_flip_display();
 
 		switch (event.type) {
-			case ALLEGRO_EVENT_DISPLAY_CLOSE:
-				return "a";
-				break;
+		case ALLEGRO_EVENT_DISPLAY_CLOSE:
+			return "a";
+			break;
 
-			case ALLEGRO_EVENT_KEY_DOWN:
-				if (event.keyboard.keycode == 67) name_gotten = true;
-				if (event.keyboard.keycode == 63) { if (nameScoreBoard.size() != 0) nameScoreBoard.pop_back(); }
-				if (nameScoreBoard.size() < 12 && event.keyboard.keycode == 75) nameScoreBoard += "_";
-				if (nameScoreBoard.size() < 12 && event.keyboard.keycode >= 1 && event.keyboard.keycode <= 36) nameScoreBoard += al_keycode_to_name(event.keyboard.keycode);
+		case ALLEGRO_EVENT_KEY_DOWN:
+			if (event.keyboard.keycode == 67) name_gotten = true;
+			if (event.keyboard.keycode == 63){
+				if (nameScoreBoard.size() != 0) nameScoreBoard.pop_back();
+			}
+			if (nameScoreBoard.size() < 12 && event.keyboard.keycode == 75) nameScoreBoard += "_";
+			if (nameScoreBoard.size() < 12 && event.keyboard.keycode >= 1 && event.keyboard.keycode <= 36) nameScoreBoard += al_keycode_to_name(event.keyboard.keycode);
 
-				break;
-
+			break;
 		}
 	}
 	al_destroy_font(name_font);
+	
 	return nameScoreBoard;
 }

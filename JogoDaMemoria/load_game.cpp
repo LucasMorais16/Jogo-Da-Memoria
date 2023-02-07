@@ -1,28 +1,33 @@
 #include "load_game.hpp"
-#include <iostream>
 
-Player load_game(std::string docName) {
-	std::ifstream arquivo(docName);
-	std::string card;
+Player load_game(std::string& docName) {
+	std::string dirName = docName;
+	
+	for (int i = 0; i < 4; i++) dirName.pop_back();
+
+	std::ifstream document(dirName + "/" + docName);
 	Player player;
 
-	if (!arquivo.is_open()) return player;
-
-	arquivo >> player.playerName;
-	arquivo >> player.score;
-	arquivo >> player.matches;
-
-	std::cout << "LOAD GAME" << std::endl;
-	for (int i = 0; i < NUM_CARDS; i++) {
-		arquivo >> player.cards[i].is_flipped;
-		arquivo >> player.cards[i].id;
-		arquivo >> player.cards[i].x;
-		arquivo >> player.cards[i].y;
+	if (!document.is_open()) {
+		document.close();
+		return player;
 	}
-	arquivo.close();
+
+	document >> player.playerName;
+	document >> player.score;
+	document >> player.matches;
 
 	for (int i = 0; i < NUM_CARDS; i++) {
-		std::string nome = "bitmap_image" + std::to_string(i) + ".bmp";
+		document >> player.cards[i].is_flipped;
+		document >> player.cards[i].id;
+		document >> player.cards[i].x;
+		document >> player.cards[i].y;
+	}
+
+	document.close();
+
+	for (int i = 0; i < NUM_CARDS; i++) {
+		const std::string nome = player.playerName + "/" + "bitmap_image" + std::to_string(i) + ".bmp";
 		player.cards[i].front_image = al_load_bitmap(nome.c_str());
 	}
 

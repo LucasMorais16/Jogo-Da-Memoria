@@ -11,4 +11,4 @@
 #include "draw_interface.hpp"
 #include "read_scoreboard.hpp"
 
-bool draw_leaderboard_table(bool redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue);
+bool draw_leaderboard_table(bool& redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue);

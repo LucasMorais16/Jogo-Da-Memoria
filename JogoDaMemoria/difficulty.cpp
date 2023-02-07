@@ -1,8 +1,7 @@
 #include "difficulty.hpp"
 
-int menu_dificuldades(bool redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue) {
+int menu_dificuldades(bool& redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue) {
 	bool done_menu_difficulty = false;
-	int difficulty;
 	int x, y;
 
 	while (!done_menu_difficulty) {
@@ -19,21 +18,27 @@ int menu_dificuldades(bool redraw, const Interface interface[], ALLEGRO_EVENT_QU
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 			//EASY
-			if (x > interface[9].x && x < interface[9].x + INTERF_DIFFICULTY_W && y > interface[9].y && y < interface[9].y + INTERF_DIFFICULTY_H) {
+			if (x > interface[9].x && x < interface[9].x + INTERF_DIFFICULTY_W && y > interface[9].y 
+				&& y < interface[9].y + INTERF_DIFFICULTY_H) {
 				return 0;
 			}
 			//NORMAL
-			if (x > interface[10].x && x < interface[10].x + INTERF_DIFFICULTY_W && y > interface[10].y && y < interface[10].y + INTERF_DIFFICULTY_H) {
+			if (x > interface[10].x && x < interface[10].x + INTERF_DIFFICULTY_W && y > interface[10].y 
+				&& y < interface[10].y + INTERF_DIFFICULTY_H) {
 				return 1;
 			}
 			//MAE DINAH
-			if (x > interface[11].x && x < interface[11].x + INTERF_DIFFICULTY_W && y > interface[11].y && y < interface[11].y + INTERF_DIFFICULTY_H) {
+			if (x > interface[11].x && x < interface[11].x + INTERF_DIFFICULTY_W && y > interface[11].y 
+				&& y < interface[11].y + INTERF_DIFFICULTY_H) {
 				return 2;
 			}
+
 			break;
+
 		case ALLEGRO_EVENT_TIMER:
 			redraw = true;
 			break;
+
 		}
 
 		if (redraw && al_is_event_queue_empty(event_queue)) {

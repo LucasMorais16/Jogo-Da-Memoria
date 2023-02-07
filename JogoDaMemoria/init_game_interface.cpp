@@ -1,7 +1,7 @@
 #include "init_game_interface.hpp"
 
 void init_game_interface(ALLEGRO_BITMAP* interf_images[], Interface interface[NUM_INTERF],
-	const int spacing, const int screen_w, const int screen_h) {
+	const int& spacing, const int& screen_w, const int& screen_h) {
 
 	for (int i = 0; i < NUM_INTERF; i++) {
 		interface[i].id = i % (NUM_INTERF);
@@ -31,13 +31,9 @@ void init_game_interface(ALLEGRO_BITMAP* interf_images[], Interface interface[NU
 			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);
 			interface[i].y = (screen_h - INTERF_MENU_H * 8) / 2 + (INTERF_MENU_H + spacing);
 		}
-		if (i == 6) {
-			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);
-			interface[i].y = (screen_h - INTERF_MENU_H * 5.1) / 2 + (INTERF_MENU_H + spacing);
-		}
 		if (i == 7) {
 			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);
-			interface[i].y = (screen_h - INTERF_MENU_H * 2.4) / 2 + (INTERF_MENU_H + spacing);
+			interface[i].y = (screen_h - INTERF_MENU_H * 4) / 2 + (INTERF_MENU_H + spacing);
 		}
 		if (i == 8) {
 			interface[i].x = (screen_w - INTERF_MENU_W * 4) / 2 + (INTERF_MENU_W + spacing);

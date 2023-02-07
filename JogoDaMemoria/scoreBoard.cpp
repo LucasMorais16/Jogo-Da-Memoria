@@ -1,6 +1,6 @@
 #include "scoreBoard.hpp"
 
-void scoreBoard(const int score, const std::string nameScoreBoard) {
+void scoreBoard(const int& score, const std::string& nameScoreBoard) {
 	ALLEGRO_FONT* font18 = al_load_font("arial.ttf", 24, 0);
 
 	al_draw_textf(font18, al_map_rgb(0, 0, 0), 315, 305, ALLEGRO_ALIGN_CENTRE, "%d", score);

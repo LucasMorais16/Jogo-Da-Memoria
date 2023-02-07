@@ -32,9 +32,7 @@ int main(int argc, char** argv) {
 	ALLEGRO_DISPLAY* display = NULL;
 	ALLEGRO_EVENT_QUEUE* event_queue = NULL;
 	ALLEGRO_TIMER* timer = NULL;
-	//Player game_state;
 	
-
 	if (!al_init()) {
 		al_show_native_message_box(display, "Error", "Could not initialize Allegro 5", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 		return -1;
@@ -84,9 +82,8 @@ int main(int argc, char** argv) {
 
 	ALLEGRO_BITMAP* interf_images[NUM_INTERF];
 	for (int i = 0; i < NUM_INTERF; i++) {
-		char filename[256];
-		sprintf_s(filename, "interf%d.png", i);
-		interf_images[i] = al_load_bitmap(filename);
+		std::string filename = "interf" + std::to_string(i) + ".png";
+		interf_images[i] = al_load_bitmap(filename.c_str());
 		if (!interf_images[i]) {
 			al_show_native_message_box(display, "Error", "Could not load interface", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 			al_destroy_display(display);
@@ -98,28 +95,27 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 	}
+
 	init_game_interface(interf_images, interface, 60, screen_w, screen_h);
-
-	ALLEGRO_BITMAP* card_images[NUM_CARDS];
-	for (int i = 0; i < NUM_CARDS; i++) { //fazer igual a isso
-		char filename[256];
-		sprintf_s(filename, "card%d.png", i);
-		card_images[i] = al_load_bitmap(filename);
-
-		if (!card_images[i]) {
+	
+	for (int i = 0; i < NUM_CARDS; i++) { //fazer igual a isso	
+		std::string filename = "card" + std::to_string(i) + ".png";
+		game_cards[i].card_name = filename;
+		game_cards[i].front_image = al_load_bitmap(filename.c_str());
+		
+		if (!game_cards[i].front_image) {
 			al_show_native_message_box(display, "Error", "Could not load card image", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 			al_destroy_display(display);
 			al_destroy_event_queue(event_queue);
 			al_destroy_timer(timer);
 			for (int j = 0; j < i; j++) {
-				al_destroy_bitmap(card_images[j]);
+				al_destroy_bitmap(game_cards[j].front_image);
 			}
 			return -1;
 		}
 	}
 
-	std::string vetor[NUM_CARDS];
-	init_game_cards(card_images, game_cards, vetor, 50, screen_w, screen_h);
+	init_game_cards(game_cards, 50, screen_w, screen_h);
 
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_mouse_event_source());
@@ -127,9 +123,9 @@ int main(int argc, char** argv) {
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 
 	al_start_timer(timer);
+
 	bool done_game = false;
-	do
-	{
+	do {
 		int pair = 0; //par de 2 loops
 		int score = 0;
 		int difficulty = -1;
@@ -149,36 +145,36 @@ int main(int argc, char** argv) {
 
 		done = menu_inicial(done, redraw, interface, event_queue);
 
-		if (done == true) {
-			done_game = true;
-		}
-
+		if (done) done_game = true;
+		
 		if (!done) {
 			nameScoreBoard = get_player_name(event_queue, nameScoreBoard);
 			if (nameScoreBoard != "a") {
 				game_state.playerName = nameScoreBoard;
-			}
-			else {
+			} else {
 				done = true;
 			}
 		}
 
 		if (!done) {
 			difficulty = menu_dificuldades(redraw, interface, event_queue);
-			if (difficulty == -1) {
+			
+			switch(difficulty) {
+			case -1:
 				done = true;
-			}
-			if (difficulty == 0) {
+				break;
+
+			case 0:
 				memorize_timer = 10000;
 				increase_score = 62;
 				decrease_score = 12;
-			}
-			if (difficulty == 1) {
+				break;
+
+			case 1: 
 				increase_score = 87; //maximo = 696 pontos.
 				decrease_score = 17;
+				break;
 			}
-
-
 		}
 
 		//Jogo
@@ -207,7 +203,8 @@ int main(int argc, char** argv) {
 				done_game = true;
 				done = true;
 			}
-			else if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
+
+			if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
 				int x = event.mouse.x;
 				int y = event.mouse.y;
 
@@ -215,12 +212,14 @@ int main(int argc, char** argv) {
 				for (int i = 0; i < NUM_CARDS; i++) {
 					if (x > game_cards[i].x && x < game_cards[i].x + CARD_W && y > game_cards[i].y && y < game_cards[i].y + CARD_H && game_cards[i].is_flipped == false) {
 						pair++;
+
 						if (selected_card == -1) {
 							game_cards[i].is_flipped = true;
 							redraw = true;
 							selected_card = i;
 						}
-						else if (selected_card != -1 && game_cards[i].is_flipped == false) {
+
+						if (selected_card != -1 && game_cards[i].is_flipped == false) {
 							game_cards[i].is_flipped = true;
 							redraw = true;
 							last_card = selected_card;
@@ -240,14 +239,16 @@ int main(int argc, char** argv) {
 									al_show_native_message_box(display, "Congratulations", "You have won the game!", "", NULL, ALLEGRO_MESSAGEBOX_WARN);
 									num_matches = 0;
 								}
-							}
-							else {
+							} else {
 								game_cards[i].is_flipped = true;
+
 								for (int i = 0; i < NUM_CARDS; i++) {
 									draw_card(game_cards[i]);
 								}
+
 								al_flip_display();
 								al_rest(1.0);
+
 								score -= decrease_score;
 								game_cards[i].is_flipped = false;
 								game_cards[last_card].is_flipped = false;
@@ -263,30 +264,31 @@ int main(int argc, char** argv) {
 				for (int i = 0; i < NUM_INTERF - 2; i++) { //NUM_INTERF - 2 porque remove-se os dois botões de PLAY e QUIT do menu inicial.
 					//QUIT
 					if (x > interface[1].x && x < interface[1].x + INTERF_W && y > interface[1].y && y < interface[1].y + INTERF_H) {
-						for (int i = 0; i < NUM_CARDS; i++) {
-							num_matches = 0;
-							score = 0;
-							game_cards[i].is_flipped = false;
-							last_card = -1;
-							selected_card = -1;
+						num_matches = 0;
+						score = 0;
+						last_card = -1;
+						selected_card = -1;
 
-						}
-						shuffle(game_cards, vetor);
+						for (int i = 0; i < NUM_CARDS; i++) game_cards[i].is_flipped = false;
+
+						shuffle(game_cards);
+
 						done_game = false;
 						done = true;
+
 						break;
 					}
 					//RESET
 					if (x > interface[2].x && x < interface[2].x + INTERF_W && y > interface[2].y && y < interface[2].y + INTERF_H) {
-						for (int i = 0; i < NUM_CARDS; i++) {
-							num_matches = 0;
-							score = 0;
-							game_cards[i].is_flipped = false;
-							last_card = -1;
-							selected_card = -1;
-
-						}
-						shuffle(game_cards, vetor);
+						num_matches = 0;
+						score = 0;
+						last_card = -1;
+						selected_card = -1;
+						
+						for (int i = 0; i < NUM_CARDS; i++) game_cards[i].is_flipped = false;
+		
+						shuffle(game_cards);
+		
 						memorize = true;
 						if (memorize && difficulty != 2) {
 							memorizeCards(game_cards, interface, memorize_timer);
@@ -299,20 +301,20 @@ int main(int argc, char** argv) {
 						for (int i = 0; i < NUM_CARDS; i++) {
 							game_state.cards[i] = game_cards[i];
 						}
-						if (!save_game(game_state, vetor)) {
-							al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
-						}
-						else {
-							al_show_native_message_box(display, "Success", "Game saved!", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
-						}
 
+						if (!save_game(game_state)) {
+							al_show_native_message_box(display, "Error", "Could not save game", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+							break;
+						}
+						
+						al_show_native_message_box(display, "Success", "Game saved!", "", NULL, ALLEGRO_MESSAGEBOX_ERROR);
 						break;
 					}
 					//LOAD GAME *****FAZER*****
 					if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
 						std::string filename = get_file_name(display);
-
 						game_state = load_game(filename);
+						
 						score = game_state.score;
 						nameScoreBoard = game_state.playerName;
 						num_matches = game_state.matches;
@@ -324,14 +326,13 @@ int main(int argc, char** argv) {
 							game_cards[i].id = game_state.cards[i].id;
 							game_cards[i].front_image = game_state.cards[i].front_image;
 						}
-
+						
 						break;
 					}
 				}
 			}
-			else if (event.type == ALLEGRO_EVENT_TIMER) {
-				redraw = true;
-			}
+
+			if (event.type == ALLEGRO_EVENT_TIMER) redraw = true;
 
 			if (redraw && al_is_event_queue_empty(event_queue)) {
 				redraw = false;
@@ -347,12 +348,13 @@ int main(int argc, char** argv) {
 			}
 		}
 	} while (done_game == false);
+
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
 	al_destroy_timer(timer);
 
-	for (int i = 0; i < (NUM_CARDS / 2); i++) {
-		al_destroy_bitmap(card_images[i]);
+	for (int i = 0; i < NUM_CARDS; i++) {
+		al_destroy_bitmap(game_cards[i].front_image);
 	}
 
 	return 0;

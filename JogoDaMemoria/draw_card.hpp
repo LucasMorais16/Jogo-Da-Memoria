@@ -4,4 +4,4 @@
 #include "allegro5/bitmap_draw.h"
 #include "allegro5/bitmap_io.h"
 
-void draw_card(Card card);
+void draw_card(const Card& card);

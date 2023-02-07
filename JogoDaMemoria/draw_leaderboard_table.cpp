@@ -1,6 +1,6 @@
 #include "draw_leaderboard_table.hpp"
 
-bool draw_leaderboard_table(bool redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue) {
+bool draw_leaderboard_table(bool& redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue) {
 	bool done_menu = false;
 	int x, y;
 	char rank[3];
@@ -53,7 +53,6 @@ bool draw_leaderboard_table(bool redraw, const Interface interface[], ALLEGRO_EV
 				}
 			}
 
-			
 			al_flip_display();
 		}
 	}

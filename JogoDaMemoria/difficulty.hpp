@@ -6,6 +6,4 @@
 #include "interface.hpp"
 #include "constantes.hpp"
 
-int menu_dificuldades(bool redraw,
-	const Interface interface[],
-	ALLEGRO_EVENT_QUEUE* event_queue);
+int menu_dificuldades(bool& redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue);

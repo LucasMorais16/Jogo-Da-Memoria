@@ -7,6 +7,6 @@
 #include "constantes.hpp"
 #include "player.hpp"
 
-bool menu_inicial(bool done, bool redraw,
+bool menu_inicial(bool& done, bool& redraw,
 	const Interface interface[], 
 	ALLEGRO_EVENT_QUEUE* event_queue);

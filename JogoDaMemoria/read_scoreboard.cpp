@@ -1,15 +1,18 @@
 #include "read_scoreboard.hpp"
 
 std::vector<Player> read_scoreboard() {
-	std::ifstream arquivo("scoreBoard.csv");
+	std::ifstream document("scoreBoard.csv");
 	std::string line, cell;
 	std::vector<Player> players;
 	Player player;
 
-	if (!arquivo.is_open()) return players;
+	if (!document.is_open()) {
+		document.close();
+		return players;
+	}
 
 	int i = 0;
-	while (getline(arquivo, line)) {
+	while (getline(document, line)) {
 		std::istringstream ss(line);
 
 		while (getline(ss, cell, ';')) {
@@ -22,6 +25,8 @@ std::vector<Player> read_scoreboard() {
 		i = 0;
 		players.push_back(player);
 	}
+
 	quickSort(players, 0, players.size() - 1);
+
 	return players;
 }

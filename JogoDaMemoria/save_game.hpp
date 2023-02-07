@@ -4,5 +4,6 @@
 #include "player.hpp"
 #include "constantes.hpp"
 #include <allegro5/allegro.h>
+#include <allegro5/bitmap.h>
 
-bool save_game(const Player& player, std::string vetor[NUM_CARDS]);
+bool save_game(const Player& player);

@@ -1,7 +1,7 @@
 #include "menu_inicial.hpp"
 #include "draw_leaderboard_table.hpp"
 
-bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue) {
+bool menu_inicial(bool& done, bool& redraw, const Interface interface[], ALLEGRO_EVENT_QUEUE* event_queue) {
 	bool done_menu = false;
 	int x, y;
 
@@ -23,12 +23,7 @@ bool menu_inicial(bool done, bool redraw, const Interface interface[], ALLEGRO_E
 						done_menu = true;
 						return done; //retorna falso pois ele é declarado como falso na função Main.cpp
 					}
-					//LOAD GAME
-					if (x > interface[6].x && x < interface[6].x + INTERF_MENU_W && y > interface[6].y && y < interface[6].y + INTERF_MENU_H) {
-						
-					}
 					//LEADERBOARD
-
 					if (x > interface[7].x && x < interface[7].x + INTERF_MENU_W && y > interface[7].y && y < interface[7].y + INTERF_MENU_H) {
 						done = draw_leaderboard_table(redraw, interface, event_queue);
 						if (done == true) {
