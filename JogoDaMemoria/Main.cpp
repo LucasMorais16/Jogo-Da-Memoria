@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
 	bool done_game = false;
 	do {
 		int pair = 0; //par de 2 loops
-		int score = 0;
+		short int score = 0;
 		int difficulty = -1;
 		int memorize_timer = 5000;
 		int increase_score = 125;
@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
 		bool redraw = true;
 		int selected_card = -1;
 		int last_card = -1;
-		int num_matches = 0;
+		short int num_matches = 0;
 		std::string nameScoreBoard;
 		std::string player_name;
 
@@ -312,7 +312,7 @@ int main(int argc, char** argv) {
 					}
 					//LOAD GAME *****FAZER*****
 					if (x > interface[4].x && x < interface[4].x + INTERF_W && y > interface[4].y && y < interface[4].y + INTERF_H) {
-						std::string filename = get_file_name(display);
+						const std::string filename = get_file_name(display);
 						game_state = load_game(filename);
 						
 						score = game_state.score;

@@ -16,7 +16,6 @@ bool save_game(const Player& player) {
 	document << player.score << std::endl;
 	document << player.matches << std::endl;
 
-	ALLEGRO_BITMAP* images[NUM_CARDS]{};
 	for (int i = 0; i < NUM_CARDS; i++) {
 		document << player.cards[i].is_flipped << std::endl;
 		document << player.cards[i].id << std::endl;
@@ -26,17 +25,13 @@ bool save_game(const Player& player) {
 		ALLEGRO_BITMAP* image = al_load_bitmap(player.cards[i].card_name.c_str());
 		if (!image)	return -1;
 
-		images[i] = image;
+		const std::string nome = player.playerName + "/" + "bitmap_image" + std::to_string(i) + ".bmp";
+		al_save_bitmap(nome.c_str(), image);
+
+		al_destroy_bitmap(image);
 	}
 
 	document.close();
-
-	for (int i = 0; i < NUM_CARDS; i++) {
-		const std::string nome = player.playerName + "/" + "bitmap_image" + std::to_string(i) + ".bmp";
-		al_save_bitmap(nome.c_str(), images[i]);
-	}
-
-	for (int i = 0; i < NUM_CARDS; i++) al_destroy_bitmap(images[i]);
 
 	return true;
 }

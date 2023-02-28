@@ -11,6 +11,7 @@ std::string get_file_name(ALLEGRO_DISPLAY* display) {
 	std::string filename;
 
 	size_t pos = filepath.find_last_of("\\");
+
 	if (pos == std::string::npos) 
 		filename = filepath;
 	else 

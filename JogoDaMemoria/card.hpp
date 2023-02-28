@@ -5,7 +5,7 @@
 #include "constantes.hpp"
 
 typedef struct {
-	int id;
+	short int id;
 	int x;
 	int y;
 	bool is_flipped;
